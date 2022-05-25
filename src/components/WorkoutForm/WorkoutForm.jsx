@@ -112,9 +112,15 @@ const WorkoutForm = () => {
                 </option>
                 <option value="Chest Flyes">Chest Flyes</option>
                 <option value="Tricep Extension">Tricep Extension</option>
+                <option value="Deadlift">Deadlift</option>
+                <option value="Goblet Squat">Goblet Squat</option>
+                <option value="Leg Extension">Leg Extension</option>
+                <option value="Leg Curl">Leg Curl</option>
+                <option value="Calf Raise">Calf Raise</option>
             </select>
             <select onChange={handleEquipment} name="" id="">
-                <option value="">Dumbbells</option>
+                <option value="Dumbbells">Dumbbells</option>
+                <option value="Machine">Machine</option>
             </select>
             <p>Set 1</p>
             <input
