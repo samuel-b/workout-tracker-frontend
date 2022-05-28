@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 const WorkoutInfo = ({ workouts }) => {
     const [workout, setWorkout] = useState({});
 
-    // const { workoutId } = useParams();
-
     let params = useParams();
 
     useEffect(() => {
