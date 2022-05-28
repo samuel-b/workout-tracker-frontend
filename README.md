@@ -12,7 +12,7 @@ Project was created for the purpose to motivate me and track my workouts and to 
 - [x] Created a basic component/UI to test or display the CREATE/GET methods above
 - [x] Created a method that calculates the estimated 1RM on all exercises sets and write the highest to the record. 
 - [ ] Style with styled components/scss
-- [ ] Implementation of chart.js library
+- [x] Implementation of chart.js library
 - [ ] Loading spinner/component to replace span of text
 - [ ] Re-factor code-base
 

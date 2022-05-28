@@ -17,6 +17,12 @@ const Test = () => {
                             <Nav.Link as={Link} to="/">
                                 Home
                             </Nav.Link>
+                            <Nav.Link as={Link} to="/charts">
+                                Charts
+                            </Nav.Link>
+                            <Nav.Link as={Link} to="/logs">
+                                Logs
+                            </Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

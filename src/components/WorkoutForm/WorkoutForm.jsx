@@ -104,6 +104,7 @@ const WorkoutForm = () => {
         <FormWrapper>
             <input onChange={handleDate} type="date" required />
             <select onChange={handleExercise} name="" id="">
+            <option disabled>--Chest/Triceps--</option>
                 <option value="Incline Bench-Press">Incline Bench-Press</option>
                 <option value="Bench-Press">Bench-Press</option>
                 <option value="Decline Bench-Press">Decline Bench-Press</option>
@@ -112,11 +113,18 @@ const WorkoutForm = () => {
                 </option>
                 <option value="Chest Flyes">Chest Flyes</option>
                 <option value="Tricep Extension">Tricep Extension</option>
+                <option disabled>--Legs--</option>
                 <option value="Deadlift">Deadlift</option>
                 <option value="Goblet Squat">Goblet Squat</option>
                 <option value="Leg Extension">Leg Extension</option>
                 <option value="Leg Curl">Leg Curl</option>
                 <option value="Calf Raise">Calf Raise</option>
+                <option disabled>--Back/Biceps--</option>
+                <option value="Row"> Row</option>
+                <option value="Incline Row">Incline Row</option>
+                <option value="Bent-Over Row">Bent-Over Row</option>
+                <option value="Hammer Curl">Hammer Curl</option>
+                <option value="Preacher Curl">Preacher Curl</option>
             </select>
             <select onChange={handleEquipment} name="" id="">
                 <option value="Dumbbells">Dumbbells</option>
