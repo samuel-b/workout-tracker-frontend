@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { create } from "../../services/server";
 import { FormWrapper } from "./StyledWorkoutForm";
+import {
+    StyledButton,
+    StyledInput,
+    StyledTextArea,
+    StyledSelect,
+    StyledDiabledButton,
+} from "./StyledWorkoutForm";
 
 const WorkoutForm = () => {
     const [date, setDate] = useState("");
@@ -72,18 +79,6 @@ const WorkoutForm = () => {
     };
 
     const handleSubmit = () => {
-        if (
-            !date ||
-            !repsSetOne ||
-            !repsSetTwo ||
-            !repsSetThree ||
-            !weightSetOne ||
-            !weightSetTwo ||
-            !weightSetThree
-        ) {
-            alert("Missing Input Fields");
-            return;
-        }
         create(
             "workouts",
             date,
@@ -102,9 +97,9 @@ const WorkoutForm = () => {
 
     return (
         <FormWrapper>
-            <input onChange={handleDate} type="date" required />
-            <select onChange={handleExercise} name="" id="">
-            <option disabled>--Chest/Triceps--</option>
+            <StyledInput onChange={handleDate} type="date" required />
+            <StyledSelect onChange={handleExercise} name="" id="">
+                <option disabled>--Chest/Triceps--</option>
                 <option value="Incline Bench-Press">Incline Bench-Press</option>
                 <option value="Bench-Press">Bench-Press</option>
                 <option value="Decline Bench-Press">Decline Bench-Press</option>
@@ -125,52 +120,68 @@ const WorkoutForm = () => {
                 <option value="Bent-Over Row">Bent-Over Row</option>
                 <option value="Hammer Curl">Hammer Curl</option>
                 <option value="Preacher Curl">Preacher Curl</option>
-            </select>
-            <select onChange={handleEquipment} name="" id="">
+            </StyledSelect>
+            <StyledSelect onChange={handleEquipment} name="" id="">
                 <option value="Dumbbells">Dumbbells</option>
                 <option value="Machine">Machine</option>
-            </select>
+            </StyledSelect>
             <p>Set 1</p>
-            <input
+            <StyledInput
                 onChange={handleRepsSetOne}
                 type="number"
                 placeholder="Reps"
                 required
             />
-            <input
+            <StyledInput
                 onChange={handleWeightSetOne}
                 type="number"
                 placeholder="Weight"
                 required
             />
             <p>Set 2</p>
-            <input
+            <StyledInput
                 onChange={handleRepsSetTwo}
                 type="number"
                 placeholder="Reps"
                 required
             />
-            <input
+            <StyledInput
                 onChange={handleWeightSetTwo}
                 type="number"
                 placeholder="Weight"
                 required
             />
             <p>Set 3</p>
-            <input
+            <StyledInput
                 onChange={handleRepsSetThree}
                 type="number"
                 placeholder="Reps"
                 required
             />
-            <input
+            <StyledInput
                 onChange={handleWeightSetThree}
                 type="number"
                 placeholder="Weight"
                 required
             />
-            <textarea onChange={handleNotes} name="" id="" rows="5"></textarea>
-            <button onClick={handleSubmit}>Submit</button>
+            <StyledTextArea
+                onChange={handleNotes}
+                name=""
+                id=""
+                rows="5"></StyledTextArea>
+            {!date ||
+            !repsSetOne ||
+            !repsSetTwo ||
+            !repsSetThree ||
+            !weightSetOne ||
+            !weightSetTwo ||
+            !weightSetThree ? (
+                <StyledDiabledButton disabled>
+                    Invalid Input(s)
+                </StyledDiabledButton>
+            ) : (
+                <StyledButton onClick={handleSubmit}>Submit</StyledButton>
+            )}
         </FormWrapper>
     );
 };

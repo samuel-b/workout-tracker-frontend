@@ -34,7 +34,7 @@ const WorkoutChart = ({ item }) => {
         },
     };
 
-    let labels = item.dateArr.sort();
+    let labels = item.dateArr;
     let dataset = item.oneRmArr;
     const data = {
         labels,

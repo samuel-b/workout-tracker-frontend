@@ -3,6 +3,7 @@ import WorkoutChart from "./WorkoutChart";
 const WorkoutChartList = ({ data }) => {
     let funArr = [];
     const testFunc = (exercise) => {
+        data.sort((a, b) => (a.date > b.date) ? 1 : -1)
         let oneRmArr = [];
         let dateArr = [];
         for (let i = 0; i < data.length; i++) {
