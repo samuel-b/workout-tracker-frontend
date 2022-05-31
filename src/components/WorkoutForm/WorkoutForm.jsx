@@ -6,69 +6,39 @@ import {
     StyledInput,
     StyledTextArea,
     StyledSelect,
-    StyledDiabledButton,
 } from "./StyledWorkoutForm";
 
 const WorkoutForm = () => {
-    const [date, setDate] = useState("");
-    const [exercise, setExercise] = useState("Incline Bench-Press");
-    const [equipment, setEquipment] = useState("Dumbbells");
-    const [notes, setNotes] = useState("");
-    const [repsSetOne, setRepsSetOne] = useState(0);
-    const [repsSetTwo, setRepsSetTwo] = useState(0);
-    const [repsSetThree, setRepsSetThree] = useState(0);
-    const [weightSetOne, setWeightSetOne] = useState(0);
-    const [weightSetTwo, setWeightSetTwo] = useState(0);
-    const [weightSetThree, setWeightSetThree] = useState(0);
-
-    const handleDate = (e) => {
-        const day = e.target.value.slice(8);
-        const year = e.target.value.slice(0, 4);
-        const month = e.target.value.slice(5, 7);
-        setDate(`${day}/${month}/${year}`);
+    const initialState = {
+        date: "",
+        exercise: "Incline Bench-Press",
+        equipment: "Dumbells",
+        repsSetOne: 0,
+        weightSetOne: 0,
+        repsSetTwo: 0,
+        weightSetTwo: 0,
+        repsSetThree: 0,
+        weightSetThree: 0,
+        notes: "",
     };
 
-    const handleExercise = (e) => {
-        setExercise(e.target.value);
+    const [state, setState] = useState(initialState);
+
+    const handleInput = (e) => {
+        const inputName = e.target.name;
+        const inputValue = e.target.value;
+        setState((prev) => ({ ...prev, [inputName]: inputValue }));
     };
 
-    const handleEquipment = (e) => {
-        setEquipment(e.target.value);
-    };
-
-    const handleNotes = (e) => {
-        setNotes(e.target.value);
-    };
-
-    const handleRepsSetOne = (e) => {
-        setRepsSetOne(e.target.value);
-    };
-
-    const handleWeightSetOne = (e) => {
-        setWeightSetOne(e.target.value);
-    };
-
-    const handleRepsSetTwo = (e) => {
-        setRepsSetTwo(e.target.value);
-    };
-
-    const handleWeightSetTwo = (e) => {
-        setWeightSetTwo(e.target.value);
-    };
-
-    const handleRepsSetThree = (e) => {
-        setRepsSetThree(e.target.value);
-    };
-
-    const handleWeightSetThree = (e) => {
-        setWeightSetThree(e.target.value);
+    const formatDate = (date) => {
+        return date.split("-").reverse().join("/");
     };
 
     const calcOneRepMax = () => {
         const arr = [];
-        arr.push(weightSetOne / (1.0278 - 0.0278 * repsSetOne));
-        arr.push(weightSetTwo / (1.0278 - 0.0278 * repsSetTwo));
-        arr.push(weightSetThree / (1.0278 - 0.0278 * repsSetThree));
+        arr.push(state.weightSetOne / (1.0278 - 0.0278 * state.repsSetOne));
+        arr.push(state.weightSetTwo / (1.0278 - 0.0278 * state.repsSetTwo));
+        arr.push(state.weightSetThree / (1.0278 - 0.0278 * state.repsSetThree));
         return Number(
             arr
                 .sort(function (a, b) {
@@ -81,24 +51,32 @@ const WorkoutForm = () => {
     const handleSubmit = () => {
         create(
             "workouts",
-            date,
-            exercise,
-            equipment,
-            notes,
-            repsSetOne,
-            weightSetOne,
-            repsSetTwo,
-            weightSetTwo,
-            repsSetThree,
-            weightSetThree,
+            formatDate(state.date),
+            state.exercise,
+            state.equipment,
+            state.notes,
+            state.repsSetOne,
+            state.weightSetOne,
+            state.repsSetTwo,
+            state.weightSetTwo,
+            state.repsSetThree,
+            state.weightSetThree,
             calcOneRepMax(),
         );
     };
 
     return (
         <FormWrapper>
-            <StyledInput onChange={handleDate} type="date" required />
-            <StyledSelect onChange={handleExercise} name="" id="">
+            <StyledInput
+                type="date"
+                name="date"
+                value={state.date}
+                onChange={handleInput}
+            />
+            <StyledSelect
+                name="exercise"
+                value={state.exercise}
+                onChange={handleInput}>
                 <option disabled>--Chest/Triceps--</option>
                 <option value="Incline Bench-Press">Incline Bench-Press</option>
                 <option value="Bench-Press">Bench-Press</option>
@@ -121,67 +99,58 @@ const WorkoutForm = () => {
                 <option value="Hammer Curl">Hammer Curl</option>
                 <option value="Preacher Curl">Preacher Curl</option>
             </StyledSelect>
-            <StyledSelect onChange={handleEquipment} name="" id="">
+            <StyledSelect
+                name="equipment"
+                value={state.equipment}
+                onChange={handleInput}>
                 <option value="Dumbbells">Dumbbells</option>
                 <option value="Machine">Machine</option>
             </StyledSelect>
             <p>Set 1</p>
             <StyledInput
-                onChange={handleRepsSetOne}
                 type="number"
-                placeholder="Reps"
-                required
+                name="repsSetOne"
+                value={state.repsSetOne}
+                onChange={handleInput}
             />
             <StyledInput
-                onChange={handleWeightSetOne}
                 type="number"
-                placeholder="Weight"
-                required
+                name="weightSetOne"
+                value={state.weightSetOne}
+                onChange={handleInput}
             />
             <p>Set 2</p>
             <StyledInput
-                onChange={handleRepsSetTwo}
                 type="number"
-                placeholder="Reps"
-                required
+                name="repsSetTwo"
+                value={state.repsSetTwo}
+                onChange={handleInput}
             />
             <StyledInput
-                onChange={handleWeightSetTwo}
                 type="number"
-                placeholder="Weight"
-                required
+                name="weightSetTwo"
+                value={state.weightSetTwo}
+                onChange={handleInput}
             />
             <p>Set 3</p>
             <StyledInput
-                onChange={handleRepsSetThree}
                 type="number"
-                placeholder="Reps"
-                required
+                name="repsSetThree"
+                value={state.repsSetThree}
+                onChange={handleInput}
             />
             <StyledInput
-                onChange={handleWeightSetThree}
                 type="number"
-                placeholder="Weight"
-                required
+                name="weightSetThree"
+                value={state.weightSetThree}
+                onChange={handleInput}
             />
             <StyledTextArea
-                onChange={handleNotes}
-                name=""
-                id=""
+                onChange={handleInput}
+                name="notes"
+                value={state.notes}
                 rows="5"></StyledTextArea>
-            {!date ||
-            !repsSetOne ||
-            !repsSetTwo ||
-            !repsSetThree ||
-            !weightSetOne ||
-            !weightSetTwo ||
-            !weightSetThree ? (
-                <StyledDiabledButton disabled>
-                    Invalid Input(s)
-                </StyledDiabledButton>
-            ) : (
-                <StyledButton onClick={handleSubmit}>Submit</StyledButton>
-            )}
+            <StyledButton onClick={handleSubmit}>Submit</StyledButton>
         </FormWrapper>
     );
 };

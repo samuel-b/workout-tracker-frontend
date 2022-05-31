@@ -11,9 +11,12 @@ Project was created for the purpose to motivate me and track my workouts and to 
 - [x] Created a CREATE method 
 - [x] Created a basic component/UI to test or display the CREATE/GET methods above
 - [x] Created a method that calculates the estimated 1RM on all exercises sets and write the highest to the record. 
-- [ ] Style with styled components/scss
 - [x] Implementation of chart.js library
-- [ ] Loading spinner/component to replace span of text
+- [x] Re-factored WorkoutFrom - state, handleInput function and dateFormat function.
+- [ ] Add form validation to WorkoutForm
+- [ ] Add success confirmation on WorkoutForm submission
+- [ ] Style with styled components/scss
+- [ ] Loading spinner/component to replace span of text (when fetching data)
 - [ ] Re-factor code-base
 
 # Future features/nice to haves
