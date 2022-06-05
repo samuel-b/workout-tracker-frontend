@@ -3,7 +3,12 @@ import WorkoutChart from "./WorkoutChart";
 const WorkoutChartList = ({ data }) => {
     let funArr = [];
     const testFunc = (exercise) => {
-        data.sort((a, b) => (a.date > b.date) ? 1 : -1)
+        //Sorts data by data.date (DD/MM/YY) in ascending order to label/display charts correctly.
+        data.sort((a, b) => {
+            const aa = a.date.split("/").reverse().join();
+            const bb = b.date.split("/").reverse().join();
+            return aa < bb ? -1 : aa > bb ? 1 : 0;
+        });
         let oneRmArr = [];
         let dateArr = [];
         for (let i = 0; i < data.length; i++) {
@@ -37,7 +42,7 @@ const WorkoutChartList = ({ data }) => {
     return (
         <>
             {funArr.map((item) => {
-                    return <WorkoutChart key={item.id} item={item} />;
+                return <WorkoutChart key={item.id} item={item} />;
             })}
         </>
     );

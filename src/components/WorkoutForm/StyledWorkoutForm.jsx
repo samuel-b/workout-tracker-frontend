@@ -46,3 +46,7 @@ export const StyledTextArea = styled.textarea`
         box-shadow: 1px 1px 1px 1px ${(props) => props.theme.colors.primary};
     }
 `;
+
+export const StyledError = styled.div`
+    color: red;
+`

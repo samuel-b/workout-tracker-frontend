@@ -6,6 +6,7 @@ import {
     StyledInput,
     StyledTextArea,
     StyledSelect,
+    StyledError,
 } from "./StyledWorkoutForm";
 
 const WorkoutForm = () => {
@@ -23,6 +24,7 @@ const WorkoutForm = () => {
     };
 
     const [state, setState] = useState(initialState);
+    const [error, setError] = useState("");
 
     const handleInput = (e) => {
         const inputName = e.target.name;
@@ -49,6 +51,13 @@ const WorkoutForm = () => {
     };
 
     const handleSubmit = () => {
+        for (let key in state) {
+            if (!state[key] && key !== "notes") {
+                setError(`Please provide a valid ${key}`);
+                return;
+            }
+        }
+        setError("");
         create(
             "workouts",
             formatDate(state.date),
@@ -151,6 +160,9 @@ const WorkoutForm = () => {
                 value={state.notes}
                 rows="5"></StyledTextArea>
             <StyledButton onClick={handleSubmit}>Submit</StyledButton>
+            <StyledError>
+                <p>{error}</p>
+            </StyledError>
         </FormWrapper>
     );
 };
