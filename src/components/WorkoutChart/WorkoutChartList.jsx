@@ -1,4 +1,5 @@
 import WorkoutChart from "./WorkoutChart";
+import StyledWorkoutChartList from "./StyledWorkoutChartList";
 
 const WorkoutChartList = ({ data }) => {
     let funArr = [];
@@ -40,11 +41,11 @@ const WorkoutChartList = ({ data }) => {
     }, Object.create(null));
 
     return (
-        <>
-            {funArr.map((item) => {
-                return <WorkoutChart key={item.id} item={item} />;
+        <StyledWorkoutChartList>
+            {funArr.map((item, index) => {
+                return <WorkoutChart key={index} item={item} />;
             })}
-        </>
+        </StyledWorkoutChartList>
     );
 };
 

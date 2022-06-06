@@ -7,7 +7,9 @@ import {
     StyledTextArea,
     StyledSelect,
     StyledError,
+    StyledSuccess
 } from "./StyledWorkoutForm";
+import {formPass} from "../../firebase";
 
 const WorkoutForm = () => {
     const initialState = {
@@ -21,10 +23,12 @@ const WorkoutForm = () => {
         repsSetThree: 0,
         weightSetThree: 0,
         notes: "",
+        pass: "pass",
     };
 
     const [state, setState] = useState(initialState);
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
 
     const handleInput = (e) => {
         const inputName = e.target.name;
@@ -51,13 +55,19 @@ const WorkoutForm = () => {
     };
 
     const handleSubmit = () => {
+        setSuccess("");
         for (let key in state) {
             if (!state[key] && key !== "notes") {
                 setError(`Please provide a valid ${key}`);
                 return;
             }
         }
+        if (state.pass !== formPass) {
+            setError(`Password Incorrect`);
+            return;
+        }
         setError("");
+        setSuccess(`${state.exercise} successfully added`);
         create(
             "workouts",
             formatDate(state.date),
@@ -72,6 +82,7 @@ const WorkoutForm = () => {
             state.weightSetThree,
             calcOneRepMax(),
         );
+        setState(initialState);
     };
 
     return (
@@ -115,39 +126,42 @@ const WorkoutForm = () => {
                 <option value="Dumbbells">Dumbbells</option>
                 <option value="Machine">Machine</option>
             </StyledSelect>
-            <p>Set 1</p>
+            <span>Set 1 Reps</span>
             <StyledInput
                 type="number"
                 name="repsSetOne"
                 value={state.repsSetOne}
                 onChange={handleInput}
             />
+            <span>Set 1 Weight</span>
             <StyledInput
                 type="number"
                 name="weightSetOne"
                 value={state.weightSetOne}
                 onChange={handleInput}
             />
-            <p>Set 2</p>
+            <span>Set 2 Reps</span>
             <StyledInput
                 type="number"
                 name="repsSetTwo"
                 value={state.repsSetTwo}
                 onChange={handleInput}
             />
+            <span>Set 2 Weight</span>
             <StyledInput
                 type="number"
                 name="weightSetTwo"
                 value={state.weightSetTwo}
                 onChange={handleInput}
             />
-            <p>Set 3</p>
+            <span>Set 3 Reps</span>
             <StyledInput
                 type="number"
                 name="repsSetThree"
                 value={state.repsSetThree}
                 onChange={handleInput}
             />
+            <span>Set 3 Weights</span>
             <StyledInput
                 type="number"
                 name="weightSetThree"
@@ -159,10 +173,15 @@ const WorkoutForm = () => {
                 name="notes"
                 value={state.notes}
                 rows="5"></StyledTextArea>
+            <StyledInput
+                type="password"
+                name="pass"
+                value={state.pass}
+                onChange={handleInput}
+            />
             <StyledButton onClick={handleSubmit}>Submit</StyledButton>
-            <StyledError>
-                <p>{error}</p>
-            </StyledError>
+                <StyledError>{error}</StyledError>
+                <StyledSuccess>{success}</StyledSuccess>
         </FormWrapper>
     );
 };

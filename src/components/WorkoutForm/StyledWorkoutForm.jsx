@@ -1,9 +1,13 @@
 import styled from "styled-components";
 
+//TODO Re-factor media-query
 export const FormWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 15%;
+  @media (max-width: 768px) {
+    width: 50%;
+  }
 `;
 
 export const StyledInput = styled.input`
@@ -34,11 +38,6 @@ export const StyledButton = styled.button`
     }
 `;
 
-export const StyledDiabledButton = styled.button`
-    background-color: ${(props) => props.theme.colors.lightBg};
-    color: ${(props) => props.theme.colors.primary};
-`;
-
 export const StyledTextArea = styled.textarea`
     border: 1px solid ${(props) => props.theme.colors.primary};
     &:focus {
@@ -47,6 +46,10 @@ export const StyledTextArea = styled.textarea`
     }
 `;
 
-export const StyledError = styled.div`
-    color: red;
+export const StyledError = styled.span`
+    color: ${(props) => props.theme.colors.error};
+`
+
+export const StyledSuccess = styled.span`
+    color: ${(props) => props.theme.colors.success};
 `

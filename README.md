@@ -13,13 +13,19 @@ Project was created for the purpose to motivate me and track my workouts and to 
 - [x] Created a method that calculates the estimated 1RM on all exercises sets and write the highest to the record. 
 - [x] Implementation of chart.js library
 - [x] Re-factored WorkoutFrom - state, handleInput function and dateFormat function.
-- [ ] Add form validation to WorkoutForm
-- [ ] Add success confirmation on WorkoutForm submission
-- [ ] Style with styled components/scss
+- [x] Add basic form validation to WorkoutForm
+- [x] Add basic success confirmation on WorkoutForm submission
+- [x] Added a required pass to form and added basic responsiveness so web app can be deployed and for can be filled in real-time on a mobile
+- [ ] Style WorkoutForm with styled components/scss
+- [ ] Style WorkoutInfo with styled components/scss
+- [ ] Style WorkoutLog with styled components/scss
+- [ ] Improve site responsiveness (incl. chart size)
 - [ ] Loading spinner/component to replace span of text (when fetching data)
+- [ ] Add comments to code-base 
 - [ ] Re-factor code-base
 
 # Future features/nice to haves
 - [ ] Gamification of the experience
 - [ ] Authentication
+- [ ] Replace firestore with a Spring Boot API/MySQL or other DB
 - [ ] Possible re-structure of the create method/data

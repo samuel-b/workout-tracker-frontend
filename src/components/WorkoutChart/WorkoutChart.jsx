@@ -49,6 +49,7 @@ const WorkoutChart = ({ item }) => {
     };
     return (
         <>
+            {/*TODO Change chart dimensions at phone width.*/}
             <Line width={500} height={300} options={options} data={data} />
         </>
     );
