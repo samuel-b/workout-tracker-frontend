@@ -27,7 +27,7 @@ function App() {
     }
 
     return (
-        <BrowserRouter>
+        <BrowserRouter basename="/workout-tracker-react">
             <ThemeProvider theme={theme}>
                 <BootstrapNav />
                 <Routes>
