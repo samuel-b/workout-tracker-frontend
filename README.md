@@ -29,3 +29,6 @@ Project was created for the purpose to motivate me and track my workouts and to 
 - [ ] Authentication
 - [ ] Replace firestore with a Spring Boot API/MySQL or other DB
 - [ ] Possible re-structure of the create method/data
+
+# Updates
+- 16/06/2022 - Un-published Github Pages/Live version, worked on a Spring Boot API and MongoDB Atlas DB has an alternative to firestore
