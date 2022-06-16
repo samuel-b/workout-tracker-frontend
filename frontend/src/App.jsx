@@ -1,5 +1,4 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { getAll } from "./services/server";
 import { useQuery } from "react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import theme from "./theme";
@@ -12,7 +11,9 @@ import { ThemeProvider } from "styled-components";
 
 function App() {
     const getData = async () => {
-        const data = await getAll("workouts");
+        // const data = await getAll("workouts");
+        const res = await fetch("http://localhost:8080/api/workouts");
+        const data = await res.json();
         return data;
     };
 

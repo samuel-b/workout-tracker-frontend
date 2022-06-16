@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { create } from "../../services/server";
 import { FormWrapper } from "./StyledWorkoutForm";
 import {
     StyledButton,
@@ -7,9 +6,8 @@ import {
     StyledTextArea,
     StyledSelect,
     StyledError,
-    StyledSuccess
+    StyledSuccess,
 } from "./StyledWorkoutForm";
-import {formPass} from "../../firebase";
 
 const WorkoutForm = () => {
     const initialState = {
@@ -23,7 +21,7 @@ const WorkoutForm = () => {
         repsSetThree: 0,
         weightSetThree: 0,
         notes: "",
-        pass: "pass",
+        estOneRepMax: 0,
     };
 
     const [state, setState] = useState(initialState);
@@ -36,8 +34,8 @@ const WorkoutForm = () => {
         setState((prev) => ({ ...prev, [inputName]: inputValue }));
     };
 
-    const formatDate = (date) => {
-        return date.split("-").reverse().join("/");
+    const formatDate = () => {
+        state.date = state.date.split("-").reverse().join("/");
     };
 
     const calcOneRepMax = () => {
@@ -45,7 +43,7 @@ const WorkoutForm = () => {
         arr.push(state.weightSetOne / (1.0278 - 0.0278 * state.repsSetOne));
         arr.push(state.weightSetTwo / (1.0278 - 0.0278 * state.repsSetTwo));
         arr.push(state.weightSetThree / (1.0278 - 0.0278 * state.repsSetThree));
-        return Number(
+        state.estOneRepMax = Number(
             arr
                 .sort(function (a, b) {
                     return b - a;
@@ -54,34 +52,29 @@ const WorkoutForm = () => {
         );
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
         setSuccess("");
         for (let key in state) {
-            if (!state[key] && key !== "notes") {
+            if (!state[key] && key !== "notes" && key !== "estOneRepMax") {
                 setError(`Please provide a valid ${key}`);
                 return;
             }
         }
-        if (state.pass !== formPass) {
-            setError(`Password Incorrect`);
-            return;
-        }
+
         setError("");
         setSuccess(`${state.exercise} successfully added`);
-        create(
-            "workouts",
-            formatDate(state.date),
-            state.exercise,
-            state.equipment,
-            state.notes,
-            state.repsSetOne,
-            state.weightSetOne,
-            state.repsSetTwo,
-            state.weightSetTwo,
-            state.repsSetThree,
-            state.weightSetThree,
-            calcOneRepMax(),
-        );
+        formatDate();
+        calcOneRepMax();
+
+        fetch("http://localhost:8080/api/workouts/", {
+            method: "POST",
+            body: JSON.stringify(state),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
+        });
         setState(initialState);
     };
 
@@ -173,15 +166,9 @@ const WorkoutForm = () => {
                 name="notes"
                 value={state.notes}
                 rows="5"></StyledTextArea>
-            <StyledInput
-                type="password"
-                name="pass"
-                value={state.pass}
-                onChange={handleInput}
-            />
             <StyledButton onClick={handleSubmit}>Submit</StyledButton>
-                <StyledError>{error}</StyledError>
-                <StyledSuccess>{success}</StyledSuccess>
+            <StyledError>{error}</StyledError>
+            <StyledSuccess>{success}</StyledSuccess>
         </FormWrapper>
     );
 };
