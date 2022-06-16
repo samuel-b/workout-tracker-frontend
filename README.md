@@ -32,3 +32,4 @@ Project was created for the purpose to motivate me and track my workouts and to 
 
 # Updates
 - 16/06/2022 - Un-published Github Pages/Live version, worked on a Spring Boot API and MongoDB Atlas DB has an alternative to firestore
+- 16/06/2022 - Replaced firestore with a Spring Boot API and MongoDB Atlas backend, API currently only has CREATE and READ(all) operations
