@@ -68,7 +68,7 @@ const WorkoutForm = () => {
         formatDate();
         calcOneRepMax();
 
-        fetch("http://localhost:8080/api/workouts/", {
+        fetch("https://workout-tracker-sb.herokuapp.com/api/workouts/", {
             method: "POST",
             body: JSON.stringify(state),
             headers: {

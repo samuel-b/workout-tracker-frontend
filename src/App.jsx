@@ -12,7 +12,7 @@ import { ThemeProvider } from "styled-components";
 function App() {
     const getData = async () => {
         // const data = await getAll("workouts");
-        const res = await fetch("http://localhost:8080/api/workouts");
+        const res = await fetch("https://workout-tracker-sb.herokuapp.com/api/workouts");
         const data = await res.json();
         return data;
     };
